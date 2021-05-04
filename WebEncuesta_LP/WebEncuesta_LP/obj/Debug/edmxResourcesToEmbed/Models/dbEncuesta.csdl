@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EncuestaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Enc_Categorias">
+    <Key>
+      <PropertyRef Name="CategoriaId" />
+    </Key>
+    <Property Name="CategoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Enc_Opcion">
+    <Key>
+      <PropertyRef Name="OpcionId" />
+    </Key>
+    <Property Name="OpcionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PreguntaId" Type="Int32" />
+    <Property Name="NombreOpcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Enc_Preguntas">
+    <Key>
+      <PropertyRef Name="PreguntaId" />
+    </Key>
+    <Property Name="PreguntaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoriaId" Type="Int32" />
+    <Property Name="Pregunta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Multiple" Type="Boolean" />
+    <Property Name="Activo" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Enc_Respuestas">
+    <Key>
+      <PropertyRef Name="RespuestaId" />
+    </Key>
+    <Property Name="RespuestaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PreguntaId" Type="Int32" />
+    <Property Name="Respuesta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Enc_Resultados">
+    <Key>
+      <PropertyRef Name="ResultadoId" />
+    </Key>
+    <Property Name="ResultadoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UsuarioId" Type="Int32" />
+    <Property Name="PreguntaId" Type="Int32" />
+    <Property Name="TextoRespuesta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Enc_Usuarios">
+    <Key>
+      <PropertyRef Name="UsuarioId" />
+    </Key>
+    <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaHora" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="EncuestaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Enc_Categorias" EntityType="Self.Enc_Categorias" />
+    <EntitySet Name="Enc_Opcion" EntityType="Self.Enc_Opcion" />
+    <EntitySet Name="Enc_Preguntas" EntityType="Self.Enc_Preguntas" />
+    <EntitySet Name="Enc_Respuestas" EntityType="Self.Enc_Respuestas" />
+    <EntitySet Name="Enc_Resultados" EntityType="Self.Enc_Resultados" />
+    <EntitySet Name="Enc_Usuarios" EntityType="Self.Enc_Usuarios" />
+    <EntitySet Name="Administracion" EntityType="EncuestaModel.Administracion" />
+  </EntityContainer>
+  <EntityType Name="Administracion">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contraseña" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

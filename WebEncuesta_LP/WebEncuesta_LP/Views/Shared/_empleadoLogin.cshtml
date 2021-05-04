@@ -1,0 +1,22 @@
+﻿<ul class="nav navbar-nav navbar-right">
+
+    @if (Request.IsAuthenticated)
+    {
+        <li>
+            @Html.ActionLink(linkText: "LogOff", actionName: "Logout", controllerName: "Cuenta")
+        </li>
+        <li>
+            @Html.ActionLink(User.Identity.Name, "", "")                                                       
+        </li>
+
+    }
+
+    else
+    {
+        <li>
+            @Html.ActionLink(linkText: "Login Empleado", actionName: "Index", controllerName: "Cuenta")
+        </li>
+
+    }
+
+</ul>

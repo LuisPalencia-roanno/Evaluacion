@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EncuestaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administracion">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Enc_Categorias">
+          <Key>
+            <PropertyRef Name="CategoriaId" />
+          </Key>
+          <Property Name="CategoriaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreCategoria" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Enc_Opcion">
+          <Key>
+            <PropertyRef Name="OpcionId" />
+          </Key>
+          <Property Name="OpcionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PreguntaId" Type="int" />
+          <Property Name="NombreOpcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Enc_Preguntas">
+          <Key>
+            <PropertyRef Name="PreguntaId" />
+          </Key>
+          <Property Name="PreguntaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoriaId" Type="int" />
+          <Property Name="Pregunta" Type="varchar" MaxLength="50" />
+          <Property Name="Multiple" Type="bit" />
+          <Property Name="Activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="Enc_Respuestas">
+          <Key>
+            <PropertyRef Name="RespuestaId" />
+          </Key>
+          <Property Name="RespuestaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PreguntaId" Type="int" />
+          <Property Name="Respuesta" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Enc_Resultados">
+          <Key>
+            <PropertyRef Name="ResultadoId" />
+          </Key>
+          <Property Name="ResultadoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" />
+          <Property Name="PreguntaId" Type="int" />
+          <Property Name="TextoRespuesta" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Enc_Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="50" />
+          <Property Name="FechaHora" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="EncuestaModelStoreContainer">
+          <EntitySet Name="Administracion" EntityType="Self.Administracion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enc_Categorias" EntityType="Self.Enc_Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enc_Opcion" EntityType="Self.Enc_Opcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enc_Preguntas" EntityType="Self.Enc_Preguntas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enc_Respuestas" EntityType="Self.Enc_Respuestas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enc_Resultados" EntityType="Self.Enc_Resultados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enc_Usuarios" EntityType="Self.Enc_Usuarios" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EncuestaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Enc_Categorias">
+          <Key>
+            <PropertyRef Name="CategoriaId" />
+          </Key>
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCategoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Enc_Opcion">
+          <Key>
+            <PropertyRef Name="OpcionId" />
+          </Key>
+          <Property Name="OpcionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PreguntaId" Type="Int32" />
+          <Property Name="NombreOpcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Enc_Preguntas">
+          <Key>
+            <PropertyRef Name="PreguntaId" />
+          </Key>
+          <Property Name="PreguntaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoriaId" Type="Int32" />
+          <Property Name="Pregunta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Multiple" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Enc_Respuestas">
+          <Key>
+            <PropertyRef Name="RespuestaId" />
+          </Key>
+          <Property Name="RespuestaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PreguntaId" Type="Int32" />
+          <Property Name="Respuesta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Enc_Resultados">
+          <Key>
+            <PropertyRef Name="ResultadoId" />
+          </Key>
+          <Property Name="ResultadoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UsuarioId" Type="Int32" />
+          <Property Name="PreguntaId" Type="Int32" />
+          <Property Name="TextoRespuesta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Enc_Usuarios">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaHora" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="EncuestaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Enc_Categorias" EntityType="Self.Enc_Categorias" />
+          <EntitySet Name="Enc_Opcion" EntityType="Self.Enc_Opcion" />
+          <EntitySet Name="Enc_Preguntas" EntityType="Self.Enc_Preguntas" />
+          <EntitySet Name="Enc_Respuestas" EntityType="Self.Enc_Respuestas" />
+          <EntitySet Name="Enc_Resultados" EntityType="Self.Enc_Resultados" />
+          <EntitySet Name="Enc_Usuarios" EntityType="Self.Enc_Usuarios" />
+          <EntitySet Name="Administracion" EntityType="EncuestaModel.Administracion" />
+        </EntityContainer>
+        <EntityType Name="Administracion">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EncuestaModelStoreContainer" CdmEntityContainer="EncuestaEntities">
+          <EntitySetMapping Name="Enc_Categorias">
+            <EntityTypeMapping TypeName="EncuestaModel.Enc_Categorias">
+              <MappingFragment StoreEntitySet="Enc_Categorias">
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enc_Opcion">
+            <EntityTypeMapping TypeName="EncuestaModel.Enc_Opcion">
+              <MappingFragment StoreEntitySet="Enc_Opcion">
+                <ScalarProperty Name="OpcionId" ColumnName="OpcionId" />
+                <ScalarProperty Name="PreguntaId" ColumnName="PreguntaId" />
+                <ScalarProperty Name="NombreOpcion" ColumnName="NombreOpcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enc_Preguntas">
+            <EntityTypeMapping TypeName="EncuestaModel.Enc_Preguntas">
+              <MappingFragment StoreEntitySet="Enc_Preguntas">
+                <ScalarProperty Name="PreguntaId" ColumnName="PreguntaId" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="Pregunta" ColumnName="Pregunta" />
+                <ScalarProperty Name="Multiple" ColumnName="Multiple" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enc_Respuestas">
+            <EntityTypeMapping TypeName="EncuestaModel.Enc_Respuestas">
+              <MappingFragment StoreEntitySet="Enc_Respuestas">
+                <ScalarProperty Name="RespuestaId" ColumnName="RespuestaId" />
+                <ScalarProperty Name="PreguntaId" ColumnName="PreguntaId" />
+                <ScalarProperty Name="Respuesta" ColumnName="Respuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enc_Resultados">
+            <EntityTypeMapping TypeName="EncuestaModel.Enc_Resultados">
+              <MappingFragment StoreEntitySet="Enc_Resultados">
+                <ScalarProperty Name="ResultadoId" ColumnName="ResultadoId" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="PreguntaId" ColumnName="PreguntaId" />
+                <ScalarProperty Name="TextoRespuesta" ColumnName="TextoRespuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Enc_Usuarios">
+            <EntityTypeMapping TypeName="EncuestaModel.Enc_Usuarios">
+              <MappingFragment StoreEntitySet="Enc_Usuarios">
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Administracion">
+            <EntityTypeMapping TypeName="EncuestaModel.Administracion">
+              <MappingFragment StoreEntitySet="Administracion">
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

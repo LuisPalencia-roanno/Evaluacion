@@ -1,0 +1,139 @@
+﻿@model WebEncuesta_LP.ViewModel.CategoriasViewModels
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#btnAddOption").click(function(){
+                AddOptionsintoList();
+                });
+
+
+           
+
+        });
+
+        function GrabarPreguntasOpciones() {
+            if ($("#tblOpciones tr").length !== 4)
+                alert("No pueden ser mas de 4 opciones");
+            return false;
+
+
+            var TextpRespuesta = "";
+            var TextoRespuestaValida = undefined;
+            $.each($("tblOpciones tr"), function () {
+                var TextoRespuesta = $(this).find("td:eq(0) input[type=radio]:checked").val();
+                if (TextoRespuesta !== undefined) {
+                    TextoRespuestaValida = TextoRespuesta;
+                }
+            });
+
+            if (TextoRespuesta === undefined) {
+                alert("Seleccione la respuesta");
+                return false;
+            }
+
+
+
+
+            var anserTextData = "";
+            var QuestionOptions = "";
+
+            var TextoRespuestaValida = undefined;
+            $.each($("tblOpciones tr"), function () {
+                var TextoRespuesta = $(this).find("td:eq(0) input[type=radio]:checked").val();
+                if (TextoRespuesta !== undefined) {
+                    anserTextData = TextoRespuesta;
+                }
+                Option.Push(TextoRespuesta);
+            });
+
+        }
+            function AddOptionsintoList() {
+                if ($("#txtPregunta").val() === "") {
+                    alert("La pregunta no puede estar vacia");
+                    $("#txtPregunta").focus();
+                    return false;
+                }
+
+
+                if ($("#tblOpciones tr").length === 4) {
+                    $("#txtNombreOpcion").focus();
+                    $("#txtNombreOpcion").val("");
+                    alert("No pueden ser mas de 4 opciones");
+                    return false;
+                }
+                var isSucces = false;
+                $.each($("#tblOpciones tr"),
+                    function () {
+                        var listedValue = $(this).find("td:eq(0) input[type=radio]").val();
+                        if (listedValue === $("#txtNombreOpcion").val()) {
+                            alert("Ya esta en la lista");
+                            isSucces = true;
+                        }
+                    });
+
+                if (isSucces === true) {
+                    return false;
+                }
+
+                var NombreOpcion = $("#txtNombreOpcion").val();
+                var AgregarRegistro = "<tr> <td> <input type='radio' value= " +
+                    NombreOpcion +
+                    "name = 'NombreOpcion'/>" +
+                    NombreOpcion +
+                    "</td> </tr>";
+
+
+                $("#tblOpciones").append(AgregarRegistro);
+                $("#txtNombreOpcion").focus();
+                $("#txtNombreOpcion").Val('');
+            }
+        
+    </script>
+
+<br/>
+<br/>
+
+@using (Html.BeginForm("Index", "Admin", FormMethod.Post))
+    { 
+    <div class="container">
+        <div class="form-group">
+            @Html.LabelFor(expression: model => model.Categoriaid)
+            @Html.DropDownListFor(model => model.Categoriaid, Model.ListaOfCategoria, htmlAttributes: new { @class = "form-control", @id = "txtCategoriaId"})
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Pregunta)
+            @Html.TextBoxFor(model => model.Pregunta, htmlAttributes: new { @class = "form-control", @id = "txtPregunta" } )
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NombreOpcion)
+            @Html.TextBoxFor(model => model.NombreOpcion, htmlAttributes: new { @class = "form-control" , @id = "txtNombreOpcion"}) 
+
+        </div>
+
+        <div class="form-group">
+            <input id="btnAddOption" type="button" class="btn btn-default" name="Opcion" value="Agregue opción"/>
+        </div>
+
+    </div>
+}
+
+<table id="tblOpciones" class="table table-condensed" style="width:100%">
+
+</table>
+
+<div class="container">
+    <div class="form-group">
+        <input type="button" id="btnSave" value="Save" name="Grabar" class="btn btn-primary" />
+
+    </div>
+</div>
